@@ -3,9 +3,9 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('search-form');
-  const gallery = document.getElementById('gallery');
-  const loadMoreBtn = document.getElementById('load-more');
+  const form = document.querySelector('.search-form');
+  const gallery = document.querySelector('.gallery');
+  const loadMoreBtn = document.querySelector('.load-more');
   let page = 1;
   let lightbox;
 
