@@ -27,8 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoreBtn.style.display = 'block';
     initializeLightbox();
     handleLoadMoreButton(images.length, loadMoreBtn);
-
-    totalImages = 0; 
   });
 
   loadMoreBtn.addEventListener('click', async () => {
