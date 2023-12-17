@@ -33,9 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     Notiflix.Notify.info(`Total images found: ${totalImages}`);
-    if (imagesCount === 0) {
-      Notiflix.Notify.info('You done');
-    }
   });
 
   loadMoreBtn.addEventListener('click', async () => {
@@ -113,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLoadMoreButton(imagesCount, loadMoreBtn) {
     if (imagesCount < 40) {
+      Notiflix.Notify.info('You have reached the end of the page.');
       loadMoreBtn.style.display = 'none';
     } else {
       loadMoreBtn.style.display = 'block';
