@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLoadMoreButton(imagesCount, loadMoreBtn) {
     if (imagesCount < 40) {
+      Notiflix.Notify.info('You have reached the end of the page.');
       loadMoreBtn.style.display = 'none';
     } else {
-      Notiflix.Notify.info('You have reached the end of the page.');
       loadMoreBtn.style.display = 'block';
     }
   }
