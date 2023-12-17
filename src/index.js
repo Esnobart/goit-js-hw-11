@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     initializeLightbox();
-    setTimeout(() => {
     handleLoadMoreButton(images.length, loadMoreBtn);
-  }, 500);
   });
 
   function renderImages(images) {
@@ -74,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 
   function handleLoadMoreButton(imagesCount, loadMoreBtn) {
-    if (imagesCount < 40) {
+    if (imagesCount < 41) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info('You have reached the end of the page.');
     } else {
