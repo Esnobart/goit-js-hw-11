@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 
 const apiKey = '41297883-88ea64e1445e53f74e3df359e';
 const perPage = 40;
-let totalImages = 0; 
+export let totalImages = 0; 
 
 export async function searchImages(query, currentPage) {
   const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${currentPage}&per_page=${perPage}`;

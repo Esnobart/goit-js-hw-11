@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { searchImages, handleLoadMoreButton } from './api';
+import { searchImages, totalImages } from './api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.search-form');
@@ -26,7 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderImages(images);
     loadMoreBtn.style.display = 'block';
     initializeLightbox();
-    handleLoadMoreButton(images.length, loadMoreBtn);
+
+    if (images.length === 0) {
+      Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      return;
+    }
+
+    Notiflix.Notify.info(`Total images found: ${totalImages}`);
   });
 
   loadMoreBtn.addEventListener('click', async () => {
@@ -35,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     initializeLightbox();
-    handleLoadMoreButton(images.length, loadMoreBtn);
+    handleLoadMoreButton(images.length);
   });
 
   function renderImages(images) {
@@ -100,5 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
     card.appendChild(info);
 
     return card;
+  }
+
+  function handleLoadMoreButton(imagesCount) {
+    if (imagesCount === 0) {
+      Notiflix.Notify.info('You have reached the end of the page.');
+    }
+
+    if (imagesCount < 40) {
+      loadMoreBtn.style.display = 'none';
+    } else {
+      loadMoreBtn.style.display = 'block';
+    }
   }
 });
