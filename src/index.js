@@ -109,13 +109,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleLoadMoreButton(imagesCount, loadMoreBtn) {
+    console.log('Handling load more button...', imagesCount);
     if (imagesCount === 0) {
+      console.log('Notifying: You have reached the end of the page.');
       Notiflix.Notify.info('You have reached the end of the page.');
     }
 
     if (imagesCount < 40) {
+      console.log('Hiding load more button.');
       loadMoreBtn.style.display = 'none';
     } else {
+      console.log('Showing load more button.');
       loadMoreBtn.style.display = 'block';
     }
   }
