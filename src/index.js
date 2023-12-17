@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { searchImages, totalImages, handleLoadMoreButton } from './api';
+import { searchImages, handleLoadMoreButton } from './api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.search-form');
