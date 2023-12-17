@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     initializeLightbox();
-    handleLoadMoreButton(images.length);
+    handleLoadMoreButton(images.length, loadMoreBtn);
   });
 
   function renderImages(images) {
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return card;
   }
 
-  function handleLoadMoreButton(imagesCount) {
+  function handleLoadMoreButton(imagesCount, loadMoreBtn) {
     if (imagesCount === 0) {
       Notiflix.Notify.info('You have reached the end of the page.');
     }
