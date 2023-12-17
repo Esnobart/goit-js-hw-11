@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function renderImages(images) {
-    const cards = images.map(createImageCard);
-    gallery.append(...cards);
+    const cardsHTML = images.map(createImageCard).join('');
+    gallery.insertAdjacentHTML('beforeend', cardsHTML);
   }
 
   function initializeLightbox() {
