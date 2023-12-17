@@ -1,6 +1,7 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import { searchImages, totalImages, handleLoadMoreButton } from './api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.search-form');
@@ -24,9 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     loadMoreBtn.style.display = 'block';
+    initializeLightbox();
+    handleLoadMoreButton(images.length, loadMoreBtn);
 
-      initializeLightbox();
-      toggleLoadMoreButton(images.length)
+    totalImages = 0; 
   });
 
   loadMoreBtn.addEventListener('click', async () => {
@@ -34,31 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     page++;
     const images = await searchImages(query, page);
     renderImages(images);
-      initializeLightbox();
-      toggleLoadMoreButton(images.length)
+    initializeLightbox();
+    handleLoadMoreButton(images.length, loadMoreBtn);
   });
-
-  async function searchImages(query, currentPage) {
-    const apiKey = '41297883-88ea64e1445e53f74e3df359e';
-    const perPage = 40;
-
-    const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${currentPage}&per_page=${perPage}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-
-      if (data.hits.length === 0) {
-        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-        return [];
-      }
-
-      return data.hits;
-    } catch (error) {
-      console.error('Error fetching images:', error);
-      return [];
-    }
-  }
 
   function renderImages(images) {
     const cards = [];
@@ -76,15 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lightbox.destroy();
     }
 
-    lightbox = new SimpleLightbox('.gallery a',);
-    }
-    
-    function toggleLoadMoreButton(imagesCount) {
-    if (imagesCount < 40) {
-      loadMoreBtn.style.display = 'none';
-    } else {
-      loadMoreBtn.style.display = 'block';
-    }
+    lightbox = new SimpleLightbox('.gallery a');
   }
 
   function createImageCard(image) {
