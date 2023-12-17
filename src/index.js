@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 
   function handleLoadMoreButton(imagesCount, loadMoreBtn) {
-    if (imagesCount < 41) {
+    if (imagesCount < 39) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info('You have reached the end of the page.');
     } else {
