@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadMoreBtn = document.querySelector('.load-more');
   let page = 1;
   let lightbox;
-  let totalImagesCount = 0;
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
-    totalImagesCount = totalImages;
     if (totalImages > 40) {
       loadMoreBtn.style.display = 'block';
     }
@@ -34,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (images.length === 0) {
       Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      loadMoreBtn.style.display = 'none';
       return;
     }
 
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lastPage = Math.ceil(totalImages / 40);
 
-    if (page >= lastPage && totalImages === 0) {
+    if (page === lastPage) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
     }

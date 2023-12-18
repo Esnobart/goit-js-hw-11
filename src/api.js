@@ -17,7 +17,7 @@ export async function searchImages(query, currentPage) {
       return [];
     }
 
-    totalImages = data.total;
+    totalImages = data.totalHits;
     return data.hits;
   } catch (error) {
     console.error('Error fetching images:', error);
