@@ -23,12 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
+    if (images.totalHits > 40) {
+      loadMoreBtn.style.display = "block";
+    }
     renderImages(images);
-    loadMoreBtn.style.display = 'block';
     initializeLightbox();
 
     if (images.length === 0) {
       Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      loadMoreBtn.style.display = "none";
       return;
     }
 
@@ -41,7 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     initializeLightbox();
-    handleLoadMoreButton(images.length, loadMoreBtn);
+    
+    const lastPage = Math.ceil(images.totalHits / 40);
+
+    if (page === lastPage) {
+      loadMoreBtn.style.display = 'none';
+      Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
+    }
   });
 
   function renderImages(images) {
@@ -70,13 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
   `;
-
-  function handleLoadMoreButton(imagesCount, loadMoreBtn) {
-    if (imagesCount < 40) {
-      loadMoreBtn.style.display = 'none';
-      Notiflix.Notify.info('You have reached the end of the page.');
-    } else {
-      loadMoreBtn.style.display = 'block';
-    }
-  }
 });
