@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadMoreBtn = document.querySelector('.load-more');
   let page = 1;
   let lightbox;
+  let totalImagesCount = 0;
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -23,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
-    if (totalImages > 40) {
+    totalImagesCount = totalImages;
+    if (totalImagesCount > 40) {
       loadMoreBtn.style.display = 'block';
     }
       
@@ -45,9 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderImages(images);
     initializeLightbox();
 
-    const lastPage = Math.ceil(totalImages / 40);
-
-    if (page >= lastPage) {
+    if (page * 40 >= totalImagesCount) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
     }
