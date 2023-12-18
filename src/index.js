@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadMoreBtn = document.querySelector('.load-more');
   let page = 1;
   let lightbox;
-  const lastPage = Math.ceil(totalImages / 40);
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -24,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
+    const lastPage = Math.ceil(totalImages / 40);
+
     if (lastPage > 1) {
       loadMoreBtn.style.display = 'block';
     }
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = await searchImages(query, page);
     renderImages(images);
     initializeLightbox();
+
+    const lastPage = Math.ceil(totalImages / 40);
 
     if (page >= lastPage) {
       loadMoreBtn.style.display = 'none';
