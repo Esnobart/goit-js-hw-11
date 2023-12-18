@@ -23,18 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
-    const lastPage = Math.ceil(totalImages / 40);
-
-    if (lastPage > 1) {
+    if (images.totalHits > 40) {
       loadMoreBtn.style.display = 'block';
     }
-
+      
     renderImages(images);
     initializeLightbox();
 
     if (images.length === 0) {
       Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-      loadMoreBtn.style.display = 'none';
       return;
     }
 
@@ -48,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderImages(images);
     initializeLightbox();
 
-    const lastPage = Math.ceil(totalImages / 40);
+    const lastPage = Math.ceil(images.totalHits / 40);
 
     if (page >= lastPage) {
       loadMoreBtn.style.display = 'none';
