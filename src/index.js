@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (images.length === 0) {
       Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-      loadMoreBtn.style.display = "none";
+      loadMoreBtn.style.display = 'none';
       return;
     }
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const lastPage = Math.ceil(totalImages / 40);
 
-    if (page === lastPage) {
+    if (page >= lastPage) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
     }
