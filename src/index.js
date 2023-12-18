@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const images = await searchImages(query, page);
     totalImagesCount = totalImages;
-    if (totalImagesCount > 40) {
+    if (totalImages > 40) {
       loadMoreBtn.style.display = 'block';
     }
       
@@ -47,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderImages(images);
     initializeLightbox();
 
-    if (page * 40 >= totalImagesCount) {
+    const lastPage = Math.ceil(totalImages / 40);
+
+    if (page >= lastPage && totalImages === 0) {
       loadMoreBtn.style.display = 'none';
       Notiflix.Notify.info(`We're sorry, but you've reached the end of search results.`);
     }
