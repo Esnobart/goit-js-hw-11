@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     page = 1;
 
     const images = await searchImages(query, page);
-    if (totalImages > 40) {
+    if (images.length > 40) {
       loadMoreBtn.style.display = 'block';
     }
       
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderImages(images);
     initializeLightbox();
 
-    const lastPage = Math.ceil(totalImages / 40);
+    const lastPage = Math.ceil(images.length / 40);
 
     if (page >= lastPage) {
       loadMoreBtn.style.display = 'none';
